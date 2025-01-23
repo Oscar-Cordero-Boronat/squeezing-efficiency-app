@@ -15,7 +15,9 @@ class SqEfficiency:
                  asq_data: np.ndarray, 
                  phase_noise: bool = False, 
                  detection_frequency: float = 5, 
-                 decay_rate_cavity: float = 20.3):
+                 decay_rate_cavity: float = 20.3,
+                 y_axis = np.array([-3,15])
+                                            ):
         """
         Initializes the SqEfficiency object with input data for power, squeezing, and antisqueezing values.
         
@@ -33,6 +35,7 @@ class SqEfficiency:
         self.phase_noise = self._validate_boolean(phase_noise, 'Phase Noise')
         self.omega = self._validate_float(detection_frequency, 'Detection Frequency', min_value=0)
         self.gamma = self._validate_float(decay_rate_cavity, 'Decay Rate Cavity', min_value=0)
+        self.y_axis = y_axis
 
         if (self.phase_noise and len(self.sq_data) + len(self.asq_data) < 3):
             raise KeyError(f"It is required at least 2 squeezing and antisqueezing data") 
@@ -204,8 +207,8 @@ class SqEfficiency:
         ax.set_xlabel("Power [mW]")
         ax.set_ylabel("Variance [dB]")
         ax.set_xlim([0, self.P_th_fit])
-        ymax = np.max(self.asq_fit) // 2.5
-        ymin = np.min(self.sq_fit) // 2.5
+        ymax = self.y_axis[1] // 2.5
+        ymin = self.y_axis[0] // 2.5
         ax.set_yticks(np.linspace(ymin * 2.5, ymax * 2.5, int(ymax - ymin) + 1))
         ax.legend()
         ax.set_title(rf"$\eta = {self.eta_fit * 100:.2f}\text{{\%}}~~~~P_\text{{th}} = {self.P_th_fit:.2f}\,\text{{mW}}~~~~\varepsilon = {self.phase_noise_fit * 1e3:.2f}\,\text{{mrad}}$")
@@ -238,6 +241,9 @@ asq_data = st.sidebar.text_input("Antisqueezing Data [dB] (comma-separated)", "4
 phase_noise = st.sidebar.checkbox("Include Phase Noise?", value=False)
 detection_frequency = st.sidebar.text_input("Detection Frequency Ω [MHz]", "5")
 decay_rate_cavity = st.sidebar.text_input("Decay Rate Cavity γ [MHz]", "20.3")
+y_axis = st.sidebar.text_input("y-axis limits (comma-separated)", "-3,15")
+
+
 
 # Convert inputs
 power = np.array([float(x) for x in power.split(",")])
@@ -245,12 +251,13 @@ sq_data = np.array([float(x) for x in sq_data.split(",")])
 asq_data = np.array([float(x) for x in asq_data.split(",")])
 detection_frequency = float(detection_frequency)
 decay_rate_cavity = float(decay_rate_cavity)
+y_axis = np.array([float(x) for x in y_axis.split(",")])
 
 # Run the analysis
 if st.sidebar.button("Analyze"):
     try:
         # Perform analysis
-        analysis = SqEfficiency(power, sq_data, asq_data, phase_noise=phase_noise, detection_frequency=detection_frequency, decay_rate_cavity=decay_rate_cavity)
+        analysis = SqEfficiency(power, sq_data, asq_data, phase_noise=phase_noise, detection_frequency=detection_frequency, decay_rate_cavity=decay_rate_cavity, yaxis)
         fig = analysis.plot_noise()
         
         # Display the plot
