@@ -210,6 +210,7 @@ class SqEfficiency:
         ymax = self.y_axis[1] // 2.5
         ymin = self.y_axis[0] // 2.5
         ax.set_yticks(np.linspace(ymin * 2.5, ymax * 2.5, int(ymax - ymin) + 1))
+        ax.set_ylim(self.y_axis)
         ax.legend()
         ax.set_title(rf"$\eta = {self.eta_fit * 100:.2f}\text{{\%}}~~~~P_\text{{th}} = {self.P_th_fit:.2f}\,\text{{mW}}~~~~\varepsilon = {self.phase_noise_fit * 1e3:.2f}\,\text{{mrad}}$")
         ax.grid()
