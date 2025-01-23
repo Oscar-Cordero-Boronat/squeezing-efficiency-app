@@ -240,7 +240,7 @@ power = st.sidebar.text_input("Pump Power [mW] (comma-separated)", "6,12")
 sq_data = st.sidebar.text_input("Squeezing Data [dB] (comma-separated)", "-1.5,-2")
 asq_data = st.sidebar.text_input("Antisqueezing Data [dB] (comma-separated)", "4,6")
 phase_noise = st.sidebar.checkbox("Include Phase Noise?", value=False)
-detection_frequency = st.sidebar.text_input(r"Detection Frequency f [MHz]", "5")
+detection_frequency = st.sidebar.text_input(r"Detection Frequency $f$ [MHz]", "5")
 decay_rate_cavity = st.sidebar.text_input(r"Decay Rate Cavity γ [MHz]", "20.3")
 y_axis = st.sidebar.text_input("y-axis limits (comma-separated)", "-3,15")
 
