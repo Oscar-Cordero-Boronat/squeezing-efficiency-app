@@ -228,7 +228,7 @@ Decay rate and detection frequency can also be considered according to the theor
 """)
 
 # Display the equation using LaTeX
-st.latex(r"SQ = 1 - \eta\cdot\frac{4\sqrt{P/P_{th}}}{(1 + \sqrt{P/P_{th}})^2 + (f / f_{HWHM})^2}")
+st.latex(r"SQ = 1 - \eta\cdot\frac{4\sqrt{P/P_{th}}}{(1 + \sqrt{P/P_{th}})^2 + (\frac{f}{f_{HWHM}})^2}")
 st.latex(r"ASQ = 1 + \eta\cdot\frac{4\sqrt{P/P_{th}}}{(1 - \sqrt{P/P_{th}})^2 + (f / f_{HWHM})^2}")
 st.latex(r"VAR(SQ) = 10 \cdot \log_{10}\Big(SQ \cdot \cos(\varepsilon)^2 + ASQ \cdot \sin(\varepsilon)^2\Big)")
 st.latex(r"VAR(ASQ) = 10 \cdot \log_{10}\Big(ASQ \cdot \cos(\varepsilon)^2 + SQ \cdot \sin(\varepsilon)^2\Big)")
