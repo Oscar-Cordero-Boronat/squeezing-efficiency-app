@@ -228,8 +228,8 @@ Decay rate and detection frequency can also be considered according to the theor
 """)
 
 # Display the equation using LaTeX
-st.latex(r"SQ = 1 - \eta\cdot\frac{4\sqrt{P/P_{th}}}{(1 + \sqrt{P/P_{th}})^2 + (\Omega / \gamma)^2}")
-st.latex(r"ASQ = 1 + \eta\cdot\frac{4\sqrt{P/P_{th}}}{(1 - \sqrt{P/P_{th}})^2 + (\Omega / \gamma)^2}")
+st.latex(r"SQ = 1 - \eta\cdot\frac{4\sqrt{P/P_{th}}}{(1 + \sqrt{P/P_{th}})^2 + (f / f_{HWHM})^2}")
+st.latex(r"ASQ = 1 + \eta\cdot\frac{4\sqrt{P/P_{th}}}{(1 - \sqrt{P/P_{th}})^2 + (f / f_{HWHM})^2}")
 st.latex(r"VAR(SQ) = 10 \cdot \log_{10}\Big(SQ \cdot \cos(\varepsilon)^2 + ASQ \cdot \sin(\varepsilon)^2\Big)")
 st.latex(r"VAR(ASQ) = 10 \cdot \log_{10}\Big(ASQ \cdot \cos(\varepsilon)^2 + SQ \cdot \sin(\varepsilon)^2\Big)")
 
@@ -241,7 +241,7 @@ sq_data = st.sidebar.text_input("Squeezing Data [dB] (comma-separated)", "-1.5,-
 asq_data = st.sidebar.text_input("Antisqueezing Data [dB] (comma-separated)", "4,6")
 phase_noise = st.sidebar.checkbox("Include Phase Noise?", value=False)
 detection_frequency = st.sidebar.text_input(r"Detection Frequency $f$ [MHz]", "5")
-decay_rate_cavity = st.sidebar.text_input(r"Decay Rate Cavity γ [MHz]", "20.3")
+decay_rate_cavity = st.sidebar.text_input(r"Decay Rate Cavity $f_{HWHM}$ [MHz]", "20.3")
 y_axis = st.sidebar.text_input("y-axis limits (comma-separated)", "-3,15")
 
 
