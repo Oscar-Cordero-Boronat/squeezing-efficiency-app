@@ -259,7 +259,7 @@ if st.sidebar.button("Analyze"):
         # Add save/download button
         st.write("Click below to download the figure:")
         buf = io.BytesIO()  # Create an in-memory buffer
-        fig.savefig(buf, format="png")  # Save the figure into the buffer
+        fig.savefig(buf, format="png", dpi = 500)  # Save the figure into the buffer
         buf.seek(0)  # Rewind the buffer to the beginning
         st.download_button(
             label="Download Figure",
