@@ -110,7 +110,7 @@ class SqEfficiency:
 
         Updates the fitted parameters: eta, P_th, and phase_noise.
         """
-        initial_guess = [0.8, 50, 0.02] if self.phase_noise else [0.8, 50]
+        initial_guess = [0.8, 50, 0.2] if self.phase_noise else [0.8, 50]
         param_bounds = ([0, 0, 0], [1, np.inf, np.pi / 4]) if self.phase_noise else ([0, 0], [1, np.inf])
         
         # Fit model to both sq and asq data
@@ -203,6 +203,10 @@ class SqEfficiency:
         ax.plot(self.power_fit, self.asq_fit, 'b-', label="Antisqueezing Fit")
         ax.set_xlabel("Power [mW]")
         ax.set_ylabel("Variance [dB]")
+        ax.set_xlim([0, self.P_th_fit])
+        ymax = np.max(self.asq_fit) // 2.5
+        ymin = np.min(self.sq_fit) // 2.5
+        ax.set_yticks(np.linspace(ymin * 2.5, ymax * 2.5, int(ymax - ymin) + 1))
         ax.legend()
         ax.set_title(rf"$\eta = {self.eta_fit * 100:.2f}\text{{\%}}~~~~P_\text{{th}} = {self.P_th_fit:.2f}\,\text{{mW}}~~~~\varepsilon = {self.phase_noise_fit * 1e3:.2f}\,\text{{mrad}}$")
         ax.grid()
@@ -213,16 +217,17 @@ class SqEfficiency:
 st.title("Squeezing Efficiency Analysis")
 
 
-st.write(r"
-$a_2$This app analyzes the squeezing efficiency of a system by fitting the input squeezing and antisqueezing data into a theoretical model. 
-You can input the pump power, squeezing, antisqueezing data to visualize the fit and calculate key parameters such as squeezing efficiency, threshold power, and optional phase noise.
-")
+st.write(r"""
+This app analyzes the squeezing efficiency of a system by fitting the input squeezing and antisqueezing data into a theoretical model. 
+You can input the pump power, squeezing, antisqueezing data to visualize the fit and calculate key parameters such as squeezing efficiency, threshold power, and optional phase noise. 
+Decay rate and detection frequency can also be considered according to the theoretical model.
+""")
 
 # Display the equation using LaTeX
-st.latex(r"SQ = 1 - \eta\frac{4\sqrt{P/P_{th}}}{(1 + \sqrt{P/P_{th}})^2 + (\Omega / \gamma)^2}")
-st.latex(r"ASQ = 1 + \eta\frac{4\sqrt{P/P_{th}}}{(1 - \sqrt{P/P_{th}})^2 + (\Omega / \gamma)^2}")
-st.latex(r"VAR(SQ) = 10 \log_{10}\Big(SQ \cdot \cos(\varepsilon)^2 + ASQ \cdot \sin(\varepsilon)^2\Big)")
-st.latex(r"VAR(ASQ) = 10 \log_{10}\Big(ASQ \cdot \cos(\varepsilon)^2 + SQ \cdot \sin(\varepsilon)^2\Big)")
+st.latex(r"SQ = 1 - \eta\cdot\frac{4\sqrt{P/P_{th}}}{(1 + \sqrt{P/P_{th}})^2 + (\Omega / \gamma)^2}")
+st.latex(r"ASQ = 1 + \eta\cdot\frac{4\sqrt{P/P_{th}}}{(1 - \sqrt{P/P_{th}})^2 + (\Omega / \gamma)^2}")
+st.latex(r"VAR(SQ) = 10 \cdot \log_{10}\Big(SQ \cdot \cos(\varepsilon)^2 + ASQ \cdot \sin(\varepsilon)^2\Big)")
+st.latex(r"VAR(ASQ) = 10 \cdot \log_{10}\Big(ASQ \cdot \cos(\varepsilon)^2 + SQ \cdot \sin(\varepsilon)^2\Big)")
 
 
 # Inputs
@@ -231,8 +236,8 @@ power = st.sidebar.text_input("Pump Power [mW] (comma-separated)", "6,12,30")
 sq_data = st.sidebar.text_input("Squeezing Data [dB] (comma-separated)", "-1.5,-2,-2")
 asq_data = st.sidebar.text_input("Antisqueezing Data [dB] (comma-separated)", "4,6,12")
 phase_noise = st.sidebar.checkbox("Include Phase Noise?", value=False)
-detection_frequency = st.sidebar.text_input("Detection Frequency [MHz]", "5")
-decay_rate_cavity = st.sidebar.text_input("Decay Rate Cavity [MHz]", "20.3")
+detection_frequency = st.sidebar.text_input("Detection Frequency Ω [MHz]", "5")
+decay_rate_cavity = st.sidebar.text_input("Decay Rate Cavity γ [MHz]", "20.3")
 
 # Convert inputs
 power = np.array([float(x) for x in power.split(",")])
