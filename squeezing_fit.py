@@ -213,10 +213,10 @@ class SqEfficiency:
 st.title("Squeezing Efficiency Analysis")
 
 
-st.write("""
-This app analyzes the squeezing efficiency of a system by fitting the input squeezing and antisqueezing data into a theoretical model. 
+st.write(r"
+$a_2$This app analyzes the squeezing efficiency of a system by fitting the input squeezing and antisqueezing data into a theoretical model. 
 You can input the pump power, squeezing, antisqueezing data to visualize the fit and calculate key parameters such as squeezing efficiency, threshold power, and optional phase noise.
-""")
+")
 
 # Display the equation using LaTeX
 st.latex(r"SQ = 1 - \eta\frac{4\sqrt{P/P_{th}}}{(1 + \sqrt{P/P_{th}})^2 + (\Omega / \gamma)^2}")
