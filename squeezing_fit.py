@@ -214,15 +214,16 @@ st.title("Squeezing Efficiency Analysis")
 
 
 st.write("""
+asd
 This app analyzes the squeezing efficiency of a system by fitting the input squeezing and antisqueezing data into a theoretical model. 
 You can input the pump power, squeezing, antisqueezing data to visualize the fit and calculate key parameters such as squeezing efficiency, threshold power, and optional phase noise.
 """)
 
 # Display the equation using LaTeX
-st.latex(r"SQ = 1 - \eta\frac{4\sqrt{P/P_{th}}}{(1 + \sqrt{P/P_{th}})^2 + (\Omega / \gamma)^2}")
-st.latex(r"ASQ = 1 + \eta\frac{4\sqrt{P/P_{th}}}{(1 - \sqrt{P/P_{th}})^2 + (\Omega / \gamma)^2}")
-st.latex(r"VAR(SQ) = 10 \log_{10}\Big(SQ \cdot \cos(\varepsilon)^2 + ASQ \cdot \sin(\varepsilon)^2\Big)")
-st.latex(r"VAR(ASQ) = 10 \log_{10}\Big(ASQ \cdot \cos(\varepsilon)^2 + SQ \cdot \sin(\varepsilon)^2\Big)")
+#st.latex(r"SQ = 1 - \eta\frac{4\sqrt{P/P_{th}}}{(1 + \sqrt{P/P_{th}})^2 + (\Omega / \gamma)^2}")
+#st.latex(r"ASQ = 1 + \eta\frac{4\sqrt{P/P_{th}}}{(1 - \sqrt{P/P_{th}})^2 + (\Omega / \gamma)^2}")
+#st.latex(r"VAR(SQ) = 10 \log_{10}\Big(SQ \cdot \cos(\varepsilon)^2 + ASQ \cdot \sin(\varepsilon)^2\Big)")
+#st.latex(r"VAR(ASQ) = 10 \log_{10}\Big(ASQ \cdot \cos(\varepsilon)^2 + SQ \cdot \sin(\varepsilon)^2\Big)")
 
 
 # Inputs
