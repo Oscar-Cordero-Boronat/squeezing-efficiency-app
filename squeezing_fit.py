@@ -244,11 +244,17 @@ if st.sidebar.button("Analyze"):
         # Display the plot
         st.pyplot(fig)
         
-        # Add save button
-        st.write("Click below to save the figure:")
-        if st.button("Save Figure"):
-            fig.savefig("squeezing_efficiency_plot.png")
-            st.success("Figure saved as 'squeezing_efficiency_plot.png'.")
+        # Add save/download button
+        st.write("Click below to download the figure:")
+        buf = io.BytesIO()  # Create an in-memory buffer
+        fig.savefig(buf, format="png")  # Save the figure into the buffer
+        buf.seek(0)  # Rewind the buffer to the beginning
+        st.download_button(
+            label="Download Figure",
+            data=buf,
+            file_name="squeezing_efficiency_plot.png",
+            mime="image/png"
+        )
     
     except Exception as e:
         st.error(f"Error: {e}")
