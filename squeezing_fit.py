@@ -42,7 +42,6 @@ class SqEfficiency:
         else:
             # Fit the curve and plot the results
             self.fit_curve_noise()
-            self.plot_noise()
 
     def _validate_input(self, data: Union[np.ndarray, List], expected_type: type, name: str) -> np.ndarray:
         """
@@ -212,23 +211,44 @@ class SqEfficiency:
 # Streamlit App
 st.title("Squeezing Efficiency Analysis")
 
+
+st.write("""
+This app analyzes the squeezing efficiency of a system by fitting the input squeezing and antisqueezing data to a theoretical model. 
+You can input the pump power, squeezing, and antisqueezing data to visualize the fit and calculate key parameters such as squeezing efficiency (η), threshold power (P_th), and optional phase noise.
+""")
+
+
 # Inputs
 st.sidebar.header("Input Parameters")
-power = st.sidebar.text_input("Power (comma-separated, mW)", "6,12,30")
-sq_data = st.sidebar.text_input("Squeezing Data (comma-separated, dB)", "-1.5,-2,-2")
-asq_data = st.sidebar.text_input("Antisqueezing Data (comma-separated, dB)", "4,6,12")
-phase_noise = st.sidebar.checkbox("Include Phase Noise?", value=True)
+power = st.sidebar.text_input("Pump Power [mW] (comma-separated)", "6,12,30")
+sq_data = st.sidebar.text_input("Squeezing Data [dB] (comma-separated)", "-1.5,-2,-2")
+asq_data = st.sidebar.text_input("Antisqueezing Data [dB] (comma-separated)", "4,6,12")
+phase_noise = st.sidebar.checkbox("Include Phase Noise?", value=False)
+detection_frequency = st.sidebar.text_input("Detection Frequency [MHz]", "5")
+decay_rate_cavity = st.sidebar.text_input("Decay Rate Cavity [MHz]", "20.3")
 
 # Convert inputs
 power = np.array([float(x) for x in power.split(",")])
 sq_data = np.array([float(x) for x in sq_data.split(",")])
 asq_data = np.array([float(x) for x in asq_data.split(",")])
+detection_frequency = float(detection_frequency)
+decay_rate_cavity = float(decay_rate_cavity)
 
 # Run the analysis
 if st.sidebar.button("Analyze"):
     try:
-        analysis = SqEfficiency(power, sq_data, asq_data, phase_noise=phase_noise)
+        # Perform analysis
+        analysis = SqEfficiency(power, sq_data, asq_data, phase_noise=phase_noise, detection_frequency=detection_frequency, decay_rate_cavity=decay_rate_cavity)
         fig = analysis.plot_noise()
+        
+        # Display the plot
         st.pyplot(fig)
+        
+        # Add save button
+        st.write("Click below to save the figure:")
+        if st.button("Save Figure"):
+            fig.savefig("squeezing_efficiency_plot.png")
+            st.success("Figure saved as 'squeezing_efficiency_plot.png'.")
+    
     except Exception as e:
         st.error(f"Error: {e}")
