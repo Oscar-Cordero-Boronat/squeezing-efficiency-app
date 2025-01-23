@@ -236,9 +236,9 @@ st.latex(r"VAR(ASQ) = 10 \cdot \log_{10}\Big(ASQ \cdot \cos(\varepsilon)^2 + SQ 
 
 # Inputs
 st.sidebar.header("Input Parameters")
-power = st.sidebar.text_input("Pump Power [mW] (comma-separated)", "6,12,30")
-sq_data = st.sidebar.text_input("Squeezing Data [dB] (comma-separated)", "-1.5,-2,-2")
-asq_data = st.sidebar.text_input("Antisqueezing Data [dB] (comma-separated)", "4,6,12")
+power = st.sidebar.text_input("Pump Power [mW] (comma-separated)", "6,12")
+sq_data = st.sidebar.text_input("Squeezing Data [dB] (comma-separated)", "-1.5,-2")
+asq_data = st.sidebar.text_input("Antisqueezing Data [dB] (comma-separated)", "4,6")
 phase_noise = st.sidebar.checkbox("Include Phase Noise?", value=False)
 detection_frequency = st.sidebar.text_input("Detection Frequency Ω [MHz]", "5")
 decay_rate_cavity = st.sidebar.text_input("Decay Rate Cavity γ [MHz]", "20.3")
