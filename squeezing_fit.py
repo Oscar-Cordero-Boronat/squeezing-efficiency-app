@@ -257,7 +257,7 @@ y_axis = np.array([float(x) for x in y_axis.split(",")])
 if st.sidebar.button("Analyze"):
     try:
         # Perform analysis
-        analysis = SqEfficiency(power, sq_data, asq_data, phase_noise=phase_noise, detection_frequency=detection_frequency, decay_rate_cavity=decay_rate_cavity, yaxis)
+        analysis = SqEfficiency(power, sq_data, asq_data, phase_noise=phase_noise, detection_frequency=detection_frequency, decay_rate_cavity=decay_rate_cavity, y_axis = y_axis)
         fig = analysis.plot_noise()
         
         # Display the plot
