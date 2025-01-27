@@ -283,9 +283,6 @@ class Gain:
 
 
 
-# Create a multipage app using Streamlit
-st.set_page_config(page_title="Lab App", page_icon=":chart_with_upwards_trend:")
-
 # Define the app's main pages
 def squeezing_efficiency_analysis():
     st.title("Squeezing Efficiency Analysis")
@@ -460,6 +457,9 @@ def GainFit():
             st.error(f"Error: {e}")
 
 
+
+# Create a multipage app using Streamlit
+st.set_page_config(page_title="Lab App", page_icon=":chart_with_upwards_trend:")
 
 
 # Define the navigation menu
