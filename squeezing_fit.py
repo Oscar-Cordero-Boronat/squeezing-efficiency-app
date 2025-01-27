@@ -457,19 +457,19 @@ def GainFit():
             st.error(f"Error: {e}")
 
 
+intracavity()
+# # Create a multipage app using Streamlit
+# st.set_page_config(page_title="Lab App", page_icon=":chart_with_upwards_trend:")
 
-# Create a multipage app using Streamlit
-st.set_page_config(page_title="Lab App", page_icon=":chart_with_upwards_trend:")
 
+# # Define the navigation menu
+# menu = ["Squeezing Efficiency", "Intra-Cavity Loss", "Gain"]
+# choice = st.sidebar.selectbox("Select a Page:", menu)
 
-# Define the navigation menu
-menu = ["Squeezing Efficiency", "Intra-Cavity Loss", "Gain"]
-choice = st.sidebar.selectbox("Select a Page:", menu)
-
-# Page routing
-if choice == "Squeezing Efficiency":
-    squeezing_efficiency_analysis()
-elif choice == "Intra-Cavity Loss":
-    intracavity()
-elif choice == "Gain":
-    GainFit()
+# # Page routing
+# if choice == "Squeezing Efficiency":
+#     squeezing_efficiency_analysis()
+# elif choice == "Intra-Cavity Loss":
+#     intracavity()
+# elif choice == "Gain":
+#     GainFit()
