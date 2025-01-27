@@ -473,6 +473,3 @@ elif choice == "Intra-Cavity Loss":
     intracavity()
 elif choice == "Gain":
     GainFit()
-
-
-
